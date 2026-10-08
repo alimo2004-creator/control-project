@@ -61,20 +61,15 @@ The telemetry metrics below were gathered by `lap_analyzer` across 3 full laps f
 
 ## 5. Milestone 6: Free Exploration Summary
 
-An investigation was conducted into four-wheel Ackermann steering kinematics and high-fidelity 3D simulation integration. Findings highlight how dual-pivot steering geometry reduces tire scrub on high-curvature track sections compared to single-point bicycle approximations.
-
----
-
-## 6. Reproduction Guide
-
 ## 1. Four-Wheel Ackermann Kinematics & ros2_control
 
 ## 2. Modern 3D Simulation Environments (Gazebo & MVSim)
 
 ## 3. Stochastic Sampling-Based Predictive Control (Nav2 MPPI)
 
+---
 
-
+## 6. Reproduction Guide
 ```bash
 # Source ROS 2 Humble
 source /opt/ros/humble/setup.bash
@@ -85,14 +80,14 @@ sudo apt update && sudo apt install -y python3-colcon-common-extensions \
   ros-humble-rviz2 ros-humble-xacro
 ```
 In every new terminal, source the ROS distribution and built workspace:
-```
+```bash
 source /opt/ros/humble/setup.bash
 cd /path/to/bicycle_gym-main
 source install/setup.bash
 ```
 lunch modes and building
-```
-#making the directory
+```bash
+# making the directory
 mkdir /mnt/g/Control_Project-mainARL/bicycle_gym-main
 
 # Build the workspace (bicycle_sim, bicycle_control, track_environment)
