@@ -17,26 +17,26 @@ Bicycle Gym is a ROS 2 simulation environment where a vehicle model is controlle
 ## 2. Mathematical Formulations
 
 ### 2.1 Vehicle Kinematics
-The state vector is defined as $x = [x, y, \theta, v]^T$, where $(x,y)$ represents the rear-axle center[cite: 3]. State transitions are updated via Forward Euler integration:
+The state vector is defined as $x = [x, y, \theta, v]^T$, where $(x,y)$ represents the rear-axle center. State transitions are updated via Forward Euler integration:
 
 $$x_{k+1} = x_k + v_k \cos(\theta_k) \Delta t$$
 $$y_{k+1} = y_k + v_k \sin(\theta_k) \Delta t$$
 $$\theta_{k+1} = \theta_k + \frac{v_k}{L} \tan(\delta_k) \Delta t$$
 $$v_{k+1} = v_k + a_k \Delta t$$
 
-where $L = 1.25\text{ m}$ is the wheelbase, and $\delta_k$ is the steering angle[cite: 3]. Heading is normalized within $\theta \in [-\pi, \pi]$, and forward velocity is clamped to $v \ge 0$[cite: 3].
+where $L = 1.25\text{ m}$ is the wheelbase, and $\delta_k$ is the steering angle. Heading is normalized within $\theta \in [-\pi, \pi]$, and forward velocity is clamped to $v \ge 0$.
 
 ### 2.2 Control Laws
-* **Longitudinal PID:** Regulates throttle $u_v \in [-1, 1]$ to maintain a target speed $v_{\text{target}}$, using anti-windup clamping to prevent integrator saturation[cite: 3].
-* **Lateral PID:** Evaluates cross-track error ($e_y$) and heading error ($e_\theta$) to command front steering angle $\delta = -K_p e_y - K_d \dot{e}_y - K_\theta e_\theta$[cite: 3].
-* **Pure Pursuit:** Calculates curvature $\kappa = \frac{2 \sin(\alpha)}{L_d}$ toward a look-ahead point at distance $L_d(v) = k_p v + L_0$[cite: 3].
-* **Kinematic MPC:** Solves a constrained optimization problem over prediction horizon $N$ in the Frenet frame to minimize tracking errors while accounting for actuator physical constraints ($\delta \in [\delta_{\min}, \delta_{\max}]$)[cite: 3].
+* **Longitudinal PID:** Regulates throttle $u_v \in [-1, 1]$ to maintain a target speed $v_{\text{target}}$, using anti-windup clamping to prevent integrator saturation.
+* **Lateral PID:** Evaluates cross-track error ($e_y$) and heading error ($e_\theta$) to command front steering angle $\delta = -K_p e_y - K_d \dot{e}_y - K_\theta e_\theta$.
+* **Pure Pursuit:** Calculates curvature $\kappa = \frac{2 \sin(\alpha)}{L_d}$ toward a look-ahead point at distance $L_d(v) = k_p v + L_0$.
+* **Kinematic MPC:** Solves a constrained optimization problem over prediction horizon $N$ in the Frenet frame to minimize tracking errors while accounting for actuator physical constraints ($\delta \in [\delta_{\min}, \delta_{\max}]$).
 
 ---
 
 ## 3. Benchmark Comparison Table
 
-The telemetry metrics below were gathered by `lap_analyzer` across 3 full laps for each control mode[cite: 1, 2, 3, 4]:
+The telemetry metrics below were gathered by `lap_analyzer` across 3 full laps for each control mode:
 
 | Controller Mode | Best Lap Time (s) | Top Speed (m/s) | Mean CTE (m) | Max CTE (m) | RMS CTE (m) | Laps Evaluated |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
