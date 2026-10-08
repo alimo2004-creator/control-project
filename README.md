@@ -31,7 +31,8 @@ where $L = 1.25\text{ m}$ is the wheelbase, and $\delta_k$ is the steering angle
 
 ### 2.2 Control Laws
 * **Longitudinal PID:** Regulates throttle $u_v \in [-1, 1]$ to maintain a target speed $v_{\text{target}}$, using anti-windup clamping to prevent integrator saturation.
-* **Lateral PID:** Evaluates cross-track error ($e_y$) and heading error ($e_\theta$) to command front steering angle $\delta = -K_p e_y - K_d \dot{e}_y - K_\theta e_\theta$.
+* **Lateral PID:** Evaluates cross-track error ($e_y$) and heading error ($e_\theta$) to command front steering angle 
+$delta$ = $-K_p$  $e_y$ - $K_d$ $\dot{e}_y$ - ($K_i$ \ $theta$) ($e_y$ \ $theta$).
 * **Pure Pursuit:** Calculates curvature $\kappa = \frac{2 \sin(\alpha)}{L_d}$ toward a look-ahead point at distance $L_d(v) = k_p v + L_0$.
 * **Kinematic MPC:** Solves a constrained optimization problem over prediction horizon $N$ in the Frenet frame to minimize tracking errors while accounting for actuator physical constraints ($\delta \in [\delta_{\min}, \delta_{\max}]$).
 
