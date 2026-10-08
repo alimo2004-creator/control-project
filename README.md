@@ -2,8 +2,8 @@
 made by Ali Mohamed Ahmed Hassan 
 junior mechatronics and robotics
 
-# Bicycle Gym — ROS 2 Self-Driving Vehicle Simulation
-
+# ROS 2 Self-Driving Vehicle Simulation
+* Note: a large portion of the codes were made by vibe coding as i am still learning python and not a sith lord in it 😄😄
 ## video demonistrating the whole task
 (https://drive.google.com/file/d/1zSk6OEKvWxsOTGHKoJj-xNTX1sAuIc6x/view?usp=sharing)
 
