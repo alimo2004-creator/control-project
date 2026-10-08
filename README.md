@@ -259,6 +259,7 @@ Modern Gazebo, Gazebo Classic, Ackermann autonomous vehicle projects, and MVSim 
 
 The best choice depends on the objective. For rapid controller development, a lightweight or kinematic simulator may be sufficient. For evaluating realistic vehicle behavior, including tire friction and suspension effects, a suitable physics-based simulation is more appropriate. Combining both approaches provides a useful progression from controller design to more realistic autonomous vehicle testing.
 
+--- 
 
 ## 3. Stochastic Sampling-Based Predictive Control (Nav2 MPPI)
 Model Predictive Path Integral (MPPI) control is an advanced control method designed to find effective control actions for complex, nonlinear systems. Instead of evaluating only one possible future movement, MPPI samples thousands of candidate trajectories in parallel and evaluates their performance using a cost function.
