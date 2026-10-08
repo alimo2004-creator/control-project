@@ -64,6 +64,9 @@ The telemetry metrics below were gathered by `lap_analyzer` across 3 full laps f
 ---
 
 ## 5. Reproduction Guide
+
+unzip the files where they contain the codes and all related packages, also contains data folder that has images and data values for each controller
+
 ```bash
 # Source ROS 2 Humble
 source /opt/ros/humble/setup.bash
