@@ -4,6 +4,9 @@ junior mechatronics and robotics
 
 # Bicycle Gym — ROS 2 Self-Driving Vehicle Simulation
 
+## video demonistrating the whole task
+(https://drive.google.com/file/d/1zSk6OEKvWxsOTGHKoJj-xNTX1sAuIc6x/view?usp=sharing)
+
 ## 1. Overview & System Architecture
 
 Bicycle Gym is a ROS 2 simulation environment where a vehicle model is controlled around a racetrack. The vehicle is modeled with realistic dynamic constraints: velocity is treated as an integrated state affected by acceleration, drag, and friction. The system is split across three packages:
