@@ -54,7 +54,7 @@ The telemetry metrics below were gathered by `lap_analyzer` across 3 full laps f
 
 1. **Reactive vs. Predictive Control:**
    * **Lateral PID** operates strictly on instantaneous error. Due to powertrain lag and steering limits, this causes overshoot and oscillation at higher speeds (max CTE of 2.733 m).
-   * **Pure Pursuit** introduces geometric preview ($L_d$), reducing path deviation significantly (RMS CTE down to 0.088 m)[cite: 3]. However, it lacks a multi-step dynamic model, making it susceptible to cutting corners at high velocities.
+   * **Pure Pursuit** introduces geometric preview ($L_d$), reducing path deviation significantly (RMS CTE down to 0.088 m). However, it lacks a multi-step dynamic model, making it susceptible to cutting corners at high velocities.
    * **Model Predictive Control (MPC)** formulates path tracking as a constrained receding horizon optimization problem. By evaluating vehicle model dynamics over $N$ steps ahead, it anticipates upcoming track curvature and optimizes steering commands smoothly within hardware limits.
 
 2. **Speed-Profile Constraints:**
