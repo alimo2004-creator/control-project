@@ -6,11 +6,11 @@ junior mechatronics and robotics
 
 ## 1. Overview & System Architecture
 
-Bicycle Gym is a ROS 2 simulation environment where a vehicle model is controlled around a racetrack[cite: 1, 2]. The vehicle is modeled with realistic dynamic constraints: velocity is treated as an integrated state affected by acceleration, drag, and friction[cite: 1]. The system is split across three packages:
+Bicycle Gym is a ROS 2 simulation environment where a vehicle model is controlled around a racetrack. The vehicle is modeled with realistic dynamic constraints: velocity is treated as an integrated state affected by acceleration, drag, and friction. The system is split across three packages:
 
-* **`bicycle_sim`**: Handles vehicle kinematics, physics integration, URDF/Xacro models, and RViz visualizations[cite: 3].
-* **`bicycle_control`**: Implements the teleoperation bridge, longitudinal PID cruise control, velocity profiling, and lateral steering controllers (Lateral PID, Pure Pursuit, Kinematic MPC)[cite: 3].
-* **`track_environment`**: Loads racetrack waypoints (`centerline_0.csv`), publishes path markers, and monitors telemetry via `lap_analyzer`[cite: 3].
+* **`bicycle_sim`**: Handles vehicle kinematics, physics integration, URDF/Xacro models, and RViz visualizations.
+* **`bicycle_control`**: Implements the teleoperation bridge, longitudinal PID cruise control, velocity profiling, and lateral steering controllers (Lateral PID, Pure Pursuit, Kinematic MPC).
+* **`track_environment`**: Loads racetrack waypoints (`centerline_0.csv`), publishes path markers, and monitors telemetry via `lap_analyzer`.
 
 ---
 
@@ -40,22 +40,22 @@ The telemetry metrics below were gathered by `lap_analyzer` across 3 full laps f
 
 | Controller Mode | Best Lap Time (s) | Top Speed (m/s) | Mean CTE (m) | Max CTE (m) | RMS CTE (m) | Laps Evaluated |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Manual Teleop (Cruise)** | 103.816[cite: 1] | 5.26[cite: 1] | 1.082[cite: 1] | 5.097[cite: 1] | 1.384[cite: 1] | 3[cite: 1] |
-| **Lateral PID** | 84.147[cite: 2] | 7.32[cite: 2] | 0.408[cite: 2] | 2.733[cite: 2] | 0.594[cite: 2] | 3[cite: 2] |
-| **Pure Pursuit** | 75.219[cite: 3] | 7.30[cite: 3] | 0.064[cite: 3] | 0.339[cite: 3] | 0.088[cite: 3] | 3[cite: 3] |
-| **Kinematic MPC** | 123.822[cite: 4] | 4.13[cite: 4] | 0.071[cite: 4] | 0.348[cite: 4] | 0.097[cite: 4] | 3[cite: 4] |
+| **Manual Teleop (Cruise)** | 103.816 | 5.26 | 1.082 | 5.097 | 1.384 | 3 |
+| **Lateral PID** | 84.147 | 7.32 | 0.408 | 2.733 | 0.594 | 3 |
+| **Pure Pursuit** | 75.219 | 7.30 | 0.064 | 0.339 | 0.088 | 3 |
+| **Kinematic MPC** | 123.822 | 4.13 | 0.071 | 0.348 | 0.097 | 3 |
 
 ---
 
 ## 4. Theoretical Analysis: MPC vs. Pure Pursuit & Lateral PID
 
 1. **Reactive vs. Predictive Control:**
-   * **Lateral PID** operates strictly on instantaneous error[cite: 3]. Due to powertrain lag and steering limits, this causes overshoot and oscillation at higher speeds (max CTE of 2.733 m)[cite: 2, 3].
-   * **Pure Pursuit** introduces geometric preview ($L_d$), reducing path deviation significantly (RMS CTE down to 0.088 m)[cite: 3]. However, it lacks a multi-step dynamic model, making it susceptible to cutting corners at high velocities[cite: 3].
-   * **Model Predictive Control (MPC)** formulates path tracking as a constrained receding horizon optimization problem[cite: 3]. By evaluating vehicle model dynamics over $N$ steps ahead, it anticipates upcoming track curvature and optimizes steering commands smoothly within hardware limits[cite: 3].
+   * **Lateral PID** operates strictly on instantaneous error. Due to powertrain lag and steering limits, this causes overshoot and oscillation at higher speeds (max CTE of 2.733 m).
+   * **Pure Pursuit** introduces geometric preview ($L_d$), reducing path deviation significantly (RMS CTE down to 0.088 m)[cite: 3]. However, it lacks a multi-step dynamic model, making it susceptible to cutting corners at high velocities.
+   * **Model Predictive Control (MPC)** formulates path tracking as a constrained receding horizon optimization problem. By evaluating vehicle model dynamics over $N$ steps ahead, it anticipates upcoming track curvature and optimizes steering commands smoothly within hardware limits.
 
 2. **Speed-Profile Constraints:**
-   * In this setup, MPC operated with lower peak velocity limits (Top Speed $4.13\text{ m/s}$), yielding consistent path tracking with virtually zero overshoot (RMS CTE $0.097\text{ m}$)[cite: 4]. Pure Pursuit achieved higher speed ($7.30\text{ m/s}$) due to its fixed look-ahead distance law[cite: 3].
+   * In this setup, MPC operated with lower peak velocity limits (Top Speed $4.13\text{ m/s}$), yielding consistent path tracking with virtually zero overshoot (RMS CTE $0.097\text{ m}$). Pure Pursuit achieved higher speed ($7.30\text{ m/s}$) due to its fixed look-ahead distance law.
 
 ---
 
